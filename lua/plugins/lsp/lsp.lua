@@ -11,26 +11,28 @@ return {
         },
 
         config = function()
-            local lsp_config = require('lspconfig')
-
-            lsp_config.ts_ls.setup({
+            -- Configure TypeScript/JavaScript LSP
+            vim.lsp.config('ts_ls', {
+                cmd = { 'typescript-language-server', '--stdio' },
                 filetypes = {
                     "javascript",
                     "typescript",
                     "javascriptreact",
                     "typescriptreact",
-                }
+                },
+                root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
             })
 
-            lsp_config.tailwindcss.setup({
+            -- Configure Tailwind CSS LSP
+            vim.lsp.config('tailwindcss', {
                 cmd = { "tailwindcss-language-server", "--stdio" },
                 filetypes = { 
                     "html", "css", "scss", "javascript", "javascriptreact",
                     "typescript", "typescriptreact", "vue"
                 },
-                root_dir = require('lspconfig').util.root_pattern(
-                    "tailwind.config.js", "tailwind.config.ts", "package.json", ".git", "*.html"
-                ),
+                root_markers = {
+                    "tailwind.config.js", "tailwind.config.ts", "package.json", ".git"
+                },
                 settings = {},
             })
 
@@ -56,18 +58,18 @@ return {
             -- Mason Setup
             require('mason').setup({})
             require('mason-lspconfig').setup({
-                ensure_installed = { 'pyright', 'jdtls', 'ts_ls'}, 			-- Specify LSPs
+                ensure_installed = { 'pyright', 'jdtls', 'ts_ls', 'lua_ls'}, 			-- Specify LSPs
                 handlers = {
                     function(server_name)
                         if server_name ~= 'jdtls' then
-                            require('lspconfig')[server_name].setup({
-                                capabilities = lsp_capabilities,
-                            })
+                            -- Use vim.lsp.enable for simple server start
+                            vim.lsp.enable(server_name)
                         end
                     end,
                     lua_ls = function()
-                        require('lspconfig').lua_ls.setup({
-                            capabilities = lsp_capabilities,
+                        vim.lsp.config('lua_ls', {
+                            cmd = { 'lua-language-server' },
+                            root_markers = { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' },
                             settings = {
                                 Lua = {
                                     runtime = { version = 'LuaJIT' },
@@ -78,6 +80,7 @@ return {
                                 },
                             },
                         })
+                        vim.lsp.enable('lua_ls')
                     end,
                 },
             })
@@ -130,4 +133,3 @@ return {
         end,
     },
 }
-
