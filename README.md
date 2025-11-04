@@ -1,4 +1,4 @@
-*** Required packages
+### Required packages
 - npm
 - pip
 - gcc
