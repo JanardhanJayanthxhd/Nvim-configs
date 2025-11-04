@@ -4,8 +4,8 @@
 - gcc
 
 install using apt
-example 
-bash
+
+example:
 ````
 sudo apt install npm
 ````
