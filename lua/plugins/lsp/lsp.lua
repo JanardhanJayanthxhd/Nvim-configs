@@ -68,7 +68,6 @@ return {
 			require("mason").setup({})
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					-- "pyright",
 					"jdtls",
 					"ts_ls",
 					"lua_ls",
@@ -147,33 +146,33 @@ return {
 						},
 					},
 				},
-				pylsp = {
-					settings = {
-						pylsp = {
-							plugins = {
-
-								pyflakes = { enabled = false },
-								pycodestyle = { enabled = false },
-								autopep8 = { enabled = false },
-								yapf = { enabled = false },
-								mccabe = { enabled = false },
-								pylsp_mypy = { enabled = false },
-								pylsp_black = { enabled = false },
-								pylsp_isort = { enabled = false },
-								jedi_completion = {
-									enabled = true,
-									include_params = true,
-									fuzzy = true,
-								},
-								jedi_definition = { enabled = true },
-								jedi_references = { enabled = true },
-								jedi_symbols = { enabled = true },
-							},
-							-- KEY ADDITION: Enable workspace scanning
-							configurationSources = { "pycodestyle" },
-						},
-					},
-				},
+				-- pylsp = {
+				-- 	settings = {
+				-- 		pylsp = {
+				-- 			plugins = {
+				--
+				-- 				pyflakes = { enabled = false },
+				-- 				pycodestyle = { enabled = false },
+				-- 				autopep8 = { enabled = false },
+				-- 				yapf = { enabled = false },
+				-- 				mccabe = { enabled = false },
+				-- 				pylsp_mypy = { enabled = false },
+				-- 				pylsp_black = { enabled = false },
+				-- 				pylsp_isort = { enabled = false },
+				-- 				jedi_completion = {
+				-- 					enabled = true,
+				-- 					include_params = true,
+				-- 					fuzzy = true,
+				-- 				},
+				-- 				jedi_definition = { enabled = true },
+				-- 				jedi_references = { enabled = true },
+				-- 				jedi_symbols = { enabled = true },
+				-- 			},
+				-- 			-- KEY ADDITION: Enable workspace scanning
+				-- 			configurationSources = { "pycodestyle" },
+				-- 		},
+				-- 	},
+				-- },
 				basedpyright = {
 					-- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
 					settings = {
@@ -191,7 +190,6 @@ return {
 					},
 				},
 				ruff = {
-					-- Ruff should also watch files
 					init_options = {
 						settings = {
 							-- Enable workspace diagnostics
