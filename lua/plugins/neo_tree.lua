@@ -49,21 +49,32 @@ return {
 					noremap = true,
 					nowait = true,
 				},
+				mappings = {
+					["<space>"] = "none",
+				},
 			},
 			filesystem = {
 				filtered_items = {
-					visible = true, -- Show hidden files
+					visible = true,
 					hide_dotfiles = false,
 					hide_gitignored = false,
-					hide_hidden = false, -- only works on Windows for hidden files/directories
+					hide_hidden = false,
 				},
 				follow_current_file = {
 					enabled = false,
 				},
 				use_libuv_file_watcher = true,
 			},
+			event_handlers = {
+				{
+					event = "neo_tree_buffer_enter",
+					handler = function()
+						vim.opt_local.number = true
+						vim.opt_local.relativenumber = true
+					end,
+				},
+			},
 		})
-
 		-- Keymaps matching your nvim-tree setup
 		vim.keymap.set("n", "<leader>t", "<cmd>Neotree toggle<cr>", { desc = "Toggle Neo-tree" })
 		vim.keymap.set("n", "<leader>to", "<cmd>Neotree show<cr>", { desc = "Open Neo-tree" })
